@@ -10,10 +10,10 @@ export const SocketContextProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const { authUser } = useAuth();
-
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
   useEffect(() => {
     if (authUser) {
-      const socketInstance = io("http://localhost:5050", {
+      const socketInstance = io(`${BASE_URL}`, {
         withCredentials: true,
         transports: ['websocket'],
         query: {

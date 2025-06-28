@@ -6,7 +6,7 @@ export const Verifyuser = () => {
   const { authUser, loading } = useAuth();
   
   if (loading) {
-    return <div>Loading...</div>; // Or your custom loading component
+    return <div>Loading...</div>; 
   }
   
   return authUser ? <Outlet /> : <Navigate to="/login" replace />;
