@@ -52,7 +52,7 @@ const Home = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ duration: 0.3 }}
-              className="absolute top-0 left-0 w-full h-full z-20 bg-white/60 backdrop-blur-xl flex flex-col overflow-y-auto"
+              className="absolute top-0 left-0 w-full h-full z-20 bg-white/60 backdrop-blur-xl flex flex-col overflow-hidden"
             >
               {/* Top Nav  */}
               <div className="flex items-center justify-between px-4 py-3 border-b border-gray-300 bg-white/70 backdrop-blur-lg sticky top-0 z-10">

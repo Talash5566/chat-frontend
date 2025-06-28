@@ -143,6 +143,16 @@ const RightSide = () => {
 
   return (
     <div className="flex flex-col h-full w-full bg-gradient-to-br from-white via-gray-50 to-gray-100">
+      {/* Mobile Back Button */}
+<div className="md:hidden p-3">
+  <button
+    onClick={() => useConversation.getState().clearSelectedConversation()}
+    className="text-indigo-600 font-semibold text-sm"
+  >
+    ← Back to Chats
+  </button>
+</div>
+
       {/* Messages */}
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {messages?.length > 0 ? (
