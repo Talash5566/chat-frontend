@@ -60,7 +60,9 @@ const RightSide = () => {
           `${BASE_URL}/message/${selectedConversation._id}`,
           {
             headers: { Authorization: `Bearer ${token}` },
-          }
+            withCredentials: true 
+          },
+         
         );
   
         
@@ -99,6 +101,7 @@ const RightSide = () => {
         { message: newMessage },
         {
           headers: { Authorization: `Bearer ${token}` },
+          withCredentials: true 
         }
       );
 

@@ -28,7 +28,8 @@ const LeftSide = () => {
       const response = await axios.get(`${BASE_URL}/user/currentchatters`, {
         headers: {
           'Authorization': `Bearer ${token}`
-        }
+        },
+        withCredentials: true 
       });
 
       setConversdata(response.data);
@@ -58,6 +59,7 @@ const LeftSide = () => {
         headers: {
           'Authorization': `Bearer ${token}`
         },
+        withCredentials: true 
       });
 
       setSearchuser(res.data);
@@ -79,6 +81,7 @@ const LeftSide = () => {
         {},
         {
           headers: { 'Authorization': `Bearer ${token}` },
+          withCredentials: true 
         }
       );
 
