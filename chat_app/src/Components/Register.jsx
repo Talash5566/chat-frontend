@@ -73,7 +73,7 @@ const Register = () => {
             };
 
             const response = await axios.post(
-                `${BASE_URL} /auth/register`,
+                `${BASE_URL}/auth/register`,
                 payload,
                 {
                     headers: {

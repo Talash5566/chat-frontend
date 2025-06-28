@@ -28,26 +28,26 @@ const RightSide = () => {
   }, [messages]);
   useEffect(() => {
     if (!socket) return;
-  
+
     const handleNewMessage = (incomingMessage) => {
       const isRelated =
         incomingMessage.senderId === selectedConversation?._id ||
         incomingMessage.reciverId === selectedConversation?._id;
-  
+
       if (isRelated) {
         addMessage(incomingMessage);
-  
-       
+
+
         if (initialLoadDone) {
           scrollToBottom();
         }
       }
     };
-  
+
     socket.on('newMessage', handleNewMessage);
     return () => socket.off('newMessage', handleNewMessage);
   }, [socket, selectedConversation, initialLoadDone]);
-  
+
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -60,35 +60,35 @@ const RightSide = () => {
           `${BASE_URL}/message/${selectedConversation._id}`,
           {
             headers: { Authorization: `Bearer ${token}` },
-            withCredentials: true 
+            withCredentials: true
           },
-         
+
         );
-  
-        
+
+
         if (Array.isArray(res.data)) {
           setmessages(res.data);
           setInitialLoadDone(true);
           return;
         }
-  
-       
+
+
         toast.error('Something went wrong while loading messages.');
       } catch (err) {
-        
+
         if (err.response?.status === 404 || err.response?.data === '') {
           setmessages([]);
           return;
         }
-        
+
       }
     };
-  
+
     fetchMessages();
   }, [selectedConversation]);
-  
-  
-  
+
+
+
 
   const handleSendMessage = async () => {
     if (!newMessage.trim() || !selectedConversation) return;
@@ -101,7 +101,7 @@ const RightSide = () => {
         { message: newMessage },
         {
           headers: { Authorization: `Bearer ${token}` },
-          withCredentials: true 
+          withCredentials: true
         }
       );
 
@@ -157,20 +157,14 @@ const RightSide = () => {
 
       {/* Input */}
       <div className="p-3 border-t border-gray-200 bg-white">
-        <div className="flex items-center">
-          <button className="p-2 text-gray-500">
-            <FiSmile />
-          </button>
-          <button className="p-2 text-gray-500">
-            <FiImage />
-          </button>
+        <div className="flex items-center gap-2">
           <input
             type="text"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Type a message..."
-            className="flex-1 mx-2 py-2 px-4 text-black rounded-full border border-gray-300"
+            className="flex-1 py-2 px-4 text-black rounded-full border border-gray-300"
           />
           <button
             onClick={handleSendMessage}
@@ -180,6 +174,7 @@ const RightSide = () => {
             <FiSend />
           </button>
         </div>
+
       </div>
     </div>
   );
@@ -194,11 +189,10 @@ const Message = ({ message, isMe }) => {
       className={`flex ${isMe ? 'justify-end' : 'justify-start'}`}
     >
       <div
-        className={`px-4 py-2 rounded-2xl shadow ${
-          isMe
+        className={`px-4 py-2 rounded-2xl shadow ${isMe
             ? 'bg-indigo-500 text-white rounded-br-none'
             : 'bg-gray-200 text-black rounded-bl-none'
-        } max-w-xs`}
+          } max-w-xs`}
       >
         <p className="text-sm">{message.message}</p>
         <p className="text-xs text-right mt-1 opacity-70">
